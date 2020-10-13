@@ -14,16 +14,24 @@ import uk.gov.companieshouse.kafka_email.model.EmailSend;
 @Service
 public class EmailKafkaProducer {
 
-    private final SerializerFactory serializerFactory;
+    private final AvroSerializer<EmailSend> serializer;
     private final CHKafkaProducer chKafkaProducer;
     private static final String EMAIL_SEND_TOPIC = "email-send";
 
     public EmailKafkaProducer(
         final ProducerConfig producerConfig
     ) {
-        this.serializerFactory = new SerializerFactory();
-        this.chKafkaProducer = new CHKafkaProducer(producerConfig);
+        this(new SerializerFactory(), new CHKafkaProducer(producerConfig));
     }
+
+    protected EmailKafkaProducer(
+        final SerializerFactory serializerFactory,
+        final CHKafkaProducer chKafkaProducer
+    ) {
+        this.serializer = serializerFactory.getGenericRecordSerializer(EmailSend.class);
+        this.chKafkaProducer = chKafkaProducer;
+    }
+
 
     /**
      * Sends an email-send message to the Kafka producer.
@@ -34,18 +42,12 @@ public class EmailKafkaProducer {
      */
     public void sendEmail(final EmailSend email)
             throws SerializationException, ExecutionException, InterruptedException {
-        final Message message = this.createMessage(email);
+        
+        final Message message = new Message();
+        message.setValue(serializer.toBinary(email));
+        message.setTopic(EMAIL_SEND_TOPIC);
+        message.setTimestamp(new Date().getTime());
+
         chKafkaProducer.send(message);
     }
-
-    private Message createMessage(final EmailSend emailSend) throws SerializationException {
-		final AvroSerializer<EmailSend> serializer =
-				serializerFactory.getGenericRecordSerializer(EmailSend.class);
-		final Message message = new Message();
-		message.setValue(serializer.toBinary(emailSend));
-		message.setTopic(EMAIL_SEND_TOPIC);
-		message.setTimestamp(new Date().getTime());
-		return message;
-    }
-
 }

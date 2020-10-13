@@ -6,7 +6,7 @@
 
     <artifactId>ch-kafka-email</artifactId>
     <name>ch-kafka-email</name>
-    <version>1.0.0</version>
+    <version>unversioned</version>
     <packaging>jar</packaging>
 
     <parent>
