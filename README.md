@@ -45,7 +45,7 @@ KAFKA_CONFIG_IS_ROUND_ROBIN | kafka.config.isRoundRobin | 10
 The `EmailData` object defines the minimum required data to send an email - `to` (the intended recipient's email address), `subject` and `cdnHost`. To add application data to an email, a new class should be defined which extends `EmailData` and includes attributes for storing the data. For example, from [`Suppression Api`](https://github.com/companieshouse/suppression-api):
 
 ```java
-import uk.gov.companieshouse.kafka_email.EmailData;
+import uk.gov.companieshouse.email_producer_java.EmailData;
 
 public class ApplicationReceivedEmailData extends EmailData {
 
@@ -55,44 +55,21 @@ public class ApplicationReceivedEmailData extends EmailData {
 }
 ```
 
-Once this data object has been defined, it can be used to construct an `EmailSend` object like so:
+### Sending An Email
+
+Once you've created your EmailData object, sending the email to Kafka is very simple:
 ```java
-import uk.gov.companieshouse.kafka_email.EmailFactory;
-import uk.gov.companieshouse.kafka_email.EmailSend;
+import uk.gov.companieshouse.email_producer_java.EmailProducer;
 
 ...
 
-private final EmailFactory emailFactory;
+private final EmailProducer emailKafkaProducer;
 
 ...
 
-final EmailSend email = emailFactory.buildEmail(
-                emailData, EMAIL_APP_ID, messageType);
+emailKafkaProducer.sendEmail(emailData, EMAIL_APP_ID, messageType);
 ```
 where:
 * `emailData` (_EmailData_) is an instance of the data object defined in the previous step
 * `EMAIL_APP_ID` (_String_) is the service application's name (e.g. `suppression-api`); and
 * `messageType` (_String_) references an email template in the CH Notification API's template registry.
-
-> **Note:** The call to this method will need to handle `JsonProcessingException` and `SerializationException`.
-
-### Sending An Email
-
-Providing the previous steps have been followed, sending the email to Kafka is very simple:
-```java
-import uk.gov.companieshouse.kafka_email.EmailKafkaProducer;
-
-...
-
-private final EmailKafkaProducer emailKafkaProducer;
-
-...
-
-emailKafkaProducer.sendEmail(email);
-```
-
-> **Note:** The call to this method will need to handle `ExecutionException` and `InterruptedException`.
-
-## Spring Applications
-
-`EmailFactory` and `EmailKafkaProducer` have been specified as Spring Services. In Spring applications, these classes do not require explicit instantiation. See the `EmailService` class in [`Suppression Api`](https://github.com/companieshouse/suppression-api) for a full usage example.

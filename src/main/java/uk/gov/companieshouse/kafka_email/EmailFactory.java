@@ -5,22 +5,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import java.time.ZoneOffset;
-import org.springframework.stereotype.Service;
 
 import uk.gov.companieshouse.kafka_email.model.EmailData;
-import uk.gov.companieshouse.kafka_email.model.EmailSend;
+import uk.gov.companieshouse.kafka_email.model.Email;
 
-@Service
 public class EmailFactory {
 
     private final ObjectMapper objectMapper;
 
-    public EmailFactory(ObjectMapper objectMapper) {
+    protected EmailFactory(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
-    public EmailSend buildEmail(EmailData emailData, String appId, String messageType) throws JsonProcessingException {
-        final EmailSend email = new EmailSend();
+    protected Email buildEmail(EmailData emailData, String appId, String messageType) throws JsonProcessingException {
+        final Email email = new Email();
 
         email.setData(objectMapper.writeValueAsString(emailData));
         email.setEmailAddress(emailData.getTo());
