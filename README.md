@@ -27,16 +27,6 @@ The library can be imported as a maven dependency:
 </dependency>
 ```
 
-## Environmental Variables
-
-Key                    | Description                                                     
----------------------- | ---------------------------------------------------------------
-CODE_ANALYSIS_HOST_URL | The host URL of the code analysis server                        
-CODE_ANALYSIS_LOGIN    | The analysis server account to use when analysing or publishing 
-CODE_ANALYSIS_PASSWORD | The analysis server account password                     
-
----
-
 ## Usage
 
 ### Configuration
@@ -105,4 +95,4 @@ emailKafkaProducer.sendEmail(email);
 
 ## Spring Applications
 
-`EmailFactory` and `EmailKafkaProducer` have been specified as Spring Services. In Spring applications, these classes do not require explicit instantiation. See [`Suppression Api`](https://github.com/companieshouse/suppression-api)'s `EmailService` for a full usage example.
+`EmailFactory` and `EmailKafkaProducer` have been specified as Spring Services. In Spring applications, these classes do not require explicit instantiation. See the `EmailService` class in [`Suppression Api`](https://github.com/companieshouse/suppression-api) for a full usage example.
