@@ -32,6 +32,6 @@ dist: clean package
 publish:
 	mvn jar:jar deploy:deploy
 
-.PHONY: sonar
+.PHONY: sonar-pr-analysis
 sonar:
 	mvn sonar:sonar
