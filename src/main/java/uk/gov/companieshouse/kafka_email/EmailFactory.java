@@ -7,6 +7,9 @@ import java.util.UUID;
 import java.time.ZoneOffset;
 import org.springframework.stereotype.Service;
 
+import uk.gov.companieshouse.kafka_email.model.EmailData;
+import uk.gov.companieshouse.kafka_email.model.EmailSend;
+
 @Service
 public class EmailFactory {
 

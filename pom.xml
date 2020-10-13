@@ -37,6 +37,10 @@
         <sonar.host.url>${CODE_ANALYSIS_HOST_URL}</sonar.host.url>
         <sonar.login>${CODE_ANALYSIS_LOGIN}</sonar.login>
         <sonar.password>${CODE_ANALYSIS_PASSWORD}</sonar.password>
+        <sonar.coverage.exclusions>
+            **/model/*,
+            **/model/**/*
+        </sonar.coverage.exclusions>
     </properties>
 
     <dependencies>
