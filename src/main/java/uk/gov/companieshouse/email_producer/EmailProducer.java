@@ -41,18 +41,22 @@ public class EmailProducer {
      * @throws ExecutionException should something unexpected happen
      * @throws InterruptedException should something unexpected happen
      */
-    public void sendEmail(final EmailData emailData, String messageType)
-            throws JsonProcessingException, SerializationException, ExecutionException, InterruptedException {
-
-        System.out.println(String.format("AppID: %s", appId));
+    public void sendEmail(final EmailData emailData, String messageType) throws EmailSendingException {
         
-        Email email = emailFactory.buildEmail(emailData, appId, messageType);
-        
-        final Message message = new Message();
-        message.setValue(serializer.toBinary(email));
-        message.setTopic(EMAIL_SEND_TOPIC);
-        message.setTimestamp(new Date().getTime());
-
-        chKafkaProducer.send(message);
+        try {
+            Email email = emailFactory.buildEmail(emailData, appId, messageType);
+            final Message message = new Message();
+            message.setValue(serializer.toBinary(email));
+            message.setTopic(EMAIL_SEND_TOPIC);
+            message.setTimestamp(new Date().getTime());
+    
+            chKafkaProducer.send(message);
+        } catch(JsonProcessingException | SerializationException e) {
+            throw new EmailSendingException("Error building email", e);
+        } catch(ExecutionException e) {
+            throw new EmailSendingException("Error sending message to kafka", e);
+        } catch(InterruptedException e) {
+            throw new EmailSendingException("Error - thread interrupted", e);
+        }
     }
 }

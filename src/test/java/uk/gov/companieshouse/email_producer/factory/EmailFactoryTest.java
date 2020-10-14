@@ -24,7 +24,7 @@ public class EmailFactoryTest {
 
     @Before
 	public void test() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         this.emailFactory = new EmailFactory(objectMapper);
 	}
 
