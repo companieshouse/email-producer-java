@@ -1,4 +1,4 @@
-package uk.gov.companieshouse.kafka_email.model;
+package uk.gov.companieshouse.email_producer.model;
 
 public class EmailData {
 

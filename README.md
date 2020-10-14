@@ -1,8 +1,7 @@
-# CH Kafka Email
+# Email Producer (Java)
 
-Library for handling the production and sending of emails via Apache Kafka and chs-email-sender.
+Library for handling the sending of emails via Kafka and chs-email-sender.
 
-This extends the CH Kafka library to allow the consistent creation and sending of emails via Kafka.
 
 ## Requirements
 
@@ -22,8 +21,8 @@ The library can be imported as a maven dependency:
 ```
 <dependency>
     <groupId>uk.gov.companieshouse</groupId>
-    <artifactId>ch-kafka-email</artifactId>
-    <version>1.0.0</version>
+    <artifactId>email-producer-java</artifactId>
+    <version>unversioned</version>
 </dependency>
 ```
 
@@ -63,11 +62,11 @@ import uk.gov.companieshouse.email_producer_java.EmailProducer;
 
 ...
 
-private final EmailProducer emailKafkaProducer;
+private final EmailProducer emailProducer;
 
 ...
 
-emailKafkaProducer.sendEmail(emailData, EMAIL_APP_ID, messageType);
+emailProducer.sendEmail(emailData, EMAIL_APP_ID, messageType);
 ```
 where:
 * `emailData` (_EmailData_) is an instance of the data object defined in the previous step

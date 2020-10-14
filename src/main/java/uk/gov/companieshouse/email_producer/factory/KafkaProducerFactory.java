@@ -1,16 +1,17 @@
-package uk.gov.companieshouse.kafka_email;
+package uk.gov.companieshouse.email_producer.factory;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import uk.gov.companieshouse.kafka.producer.Acks;
+import uk.gov.companieshouse.kafka.producer.CHKafkaProducer;
 import uk.gov.companieshouse.kafka.producer.ProducerConfig;
 
 /**
  * Configuration class for the kafka queue used to send emails
  */
 @Configuration
-public class KafkaConfig {
+public class KafkaProducerFactory {
 
     @Value("${kafka.broker.addr}")
     private String brokerAddr;
@@ -25,13 +26,13 @@ public class KafkaConfig {
     private boolean isRoundRobin;
 
     @Bean
-    ProducerConfig producerConfig() {
+    CHKafkaProducer kafkaProducer() {
         ProducerConfig config = new ProducerConfig();
         config.setBrokerAddresses(brokerAddr.split(","));
         config.setAcks(Acks.valueOf(acks));
         config.setRoundRobinPartitioner(isRoundRobin);
         config.setRetries(retries);
 
-        return config;
+        return new CHKafkaProducer(config);
     }
 }

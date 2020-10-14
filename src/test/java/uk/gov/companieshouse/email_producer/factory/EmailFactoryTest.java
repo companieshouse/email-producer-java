@@ -1,4 +1,4 @@
-package uk.gov.companieshouse.kafka_email;
+package uk.gov.companieshouse.email_producer.factory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,14 +7,13 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import uk.gov.companieshouse.kafka_email.model.EmailData;
-import uk.gov.companieshouse.kafka_email.model.EmailSend;
+import uk.gov.companieshouse.email_producer.model.Email;
+import uk.gov.companieshouse.email_producer.model.EmailData;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 
 public class EmailFactoryTest {
 
@@ -34,7 +33,7 @@ public class EmailFactoryTest {
         EmailData testEmailData = generateEmailData();
         when(objectMapper.writeValueAsString(testEmailData)).thenReturn("TEST DATA");
 
-        EmailSend result = emailFactory.buildEmail(testEmailData, "test-app", "test-message");
+        Email result = emailFactory.buildEmail(testEmailData, "test-app", "test-message");
 
         verify(objectMapper, times(1)).writeValueAsString(testEmailData);
         assertEquals(result.getData(), "TEST DATA");

@@ -4,8 +4,8 @@
             xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ch-kafka-email</artifactId>
-    <name>ch-kafka-email</name>
+    <artifactId>email-producer-java</artifactId>
+    <name>email-producer-java</name>
     <version>unversioned</version>
     <packaging>jar</packaging>
 
