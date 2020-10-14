@@ -54,7 +54,6 @@ public class EmailFactoryTest {
         EmailData emailData = new EmailData();
         emailData.setTo("test@ch.gov.uk");
         emailData.setSubject("Regarding: Test");
-        emailData.setCdnHost("test.cdn.local");
         return emailData;
     }
 }

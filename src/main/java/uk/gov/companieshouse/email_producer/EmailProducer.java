@@ -3,7 +3,7 @@ package uk.gov.companieshouse.email_producer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import uk.gov.companieshouse.email_producer.factory.EmailFactory;
@@ -25,12 +25,11 @@ public class EmailProducer {
     private final String appId;
 
     public EmailProducer(final EmailFactory emailFactory, final AvroSerializer<Email> serializer,
-            final CHKafkaProducer chKafkaProducer, @Qualifier("emailProducerAppId") final String appId) {
+            final CHKafkaProducer chKafkaProducer, @Value("${email.producer.appId}") final String appId) {
         this.emailFactory = emailFactory;
         this.serializer = serializer;
         this.chKafkaProducer = chKafkaProducer;
         this.appId = appId;
-        System.out.println(String.format("App ID: %s", appId));
     }
 
     /**
@@ -44,6 +43,8 @@ public class EmailProducer {
      */
     public void sendEmail(final EmailData emailData, String messageType)
             throws JsonProcessingException, SerializationException, ExecutionException, InterruptedException {
+
+        System.out.println(String.format("AppID: %s", appId));
         
         Email email = emailFactory.buildEmail(emailData, appId, messageType);
         

@@ -30,18 +30,19 @@ The library can be imported as a maven dependency:
 
 ### Configuration
 
-The following configuration variables are required to be set, whether via Environment Variables or your project's `application.yml` file:
+The following configuration variables are required to be set in your project's `application.yml` file:
 
-Environment Variable Key    | application.yml Key       | Example                                                     
---------------------------- | ------------------------- | -------------
-KAFKA_BROKER_ADDR           | kafka.broker.addr         | kafka:9092
-KAFKA_CONFIG_ACKS           | kafka.config.acks         | WAIT_FOR_ALL
-KAFKA_CONFIG_RETRIES        | kafka.config.retries      | false
-KAFKA_CONFIG_IS_ROUND_ROBIN | kafka.config.isRoundRobin | 10
+Key                       | Example                                                     
+------------------------- | -------------
+kafka.broker.addr         | kafka:9092
+kafka.config.acks         | WAIT_FOR_ALL
+kafka.config.retries      | false
+kafka.config.isRoundRobin | 10
+email.producer.appId      | suppression-api
 
 ### Building An Email
 
-The `EmailData` object defines the minimum required data to send an email - `to` (the intended recipient's email address), `subject` and `cdnHost`. To add application data to an email, a new class should be defined which extends `EmailData` and includes attributes for storing the data. For example, from [`Suppression Api`](https://github.com/companieshouse/suppression-api):
+The `EmailData` object defines the minimum required data to send an email - `to` (the intended recipient's email address) and `subject`. To add application data to an email, a new class should be defined which extends `EmailData` and includes attributes for storing the data. For example, from [`Suppression Api`](https://github.com/companieshouse/suppression-api):
 
 ```java
 import uk.gov.companieshouse.email_producer_java.EmailData;
@@ -66,9 +67,8 @@ private final EmailProducer emailProducer;
 
 ...
 
-emailProducer.sendEmail(emailData, EMAIL_APP_ID, messageType);
+emailProducer.sendEmail(emailData, messageType);
 ```
 where:
 * `emailData` (_EmailData_) is an instance of the data object defined in the previous step
-* `EMAIL_APP_ID` (_String_) is the service application's name (e.g. `suppression-api`); and
 * `messageType` (_String_) references an email template in the CH Notification API's template registry.
