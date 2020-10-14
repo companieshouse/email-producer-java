@@ -44,15 +44,14 @@ public class EmailProducerTest {
             InterruptedException, JsonProcessingException {
         
         byte[] testBytes = new byte[]{ 0x1, 0x2, 0x3 };
-        // TODO: Fix nulls after exploratory testing.
-        when(emailFactory.buildEmail(emailData, null, "test-message")).thenReturn(mockEmail);
+        when(emailFactory.buildEmail(emailData, "test-app", "test-message")).thenReturn(mockEmail);
         when(emailSerializer.toBinary(mockEmail)).thenReturn(testBytes);
         final ArgumentCaptor<Message> captor = ArgumentCaptor.forClass(Message.class);
         
-        emailKafkaProducer = new EmailProducer(emailFactory, emailSerializer, chKafkaProducer);
+        emailKafkaProducer = new EmailProducer(emailFactory, emailSerializer, chKafkaProducer, "test-app");
         emailKafkaProducer.sendEmail(emailData, "test-message");
 
-        verify(emailFactory).buildEmail(emailData, null, "test-message");
+        verify(emailFactory).buildEmail(emailData, "test-app", "test-message");
         verify(emailSerializer).toBinary(mockEmail);
         verify(chKafkaProducer).send(captor.capture());
         final Message sentEmail = captor.getValue();
@@ -64,10 +63,10 @@ public class EmailProducerTest {
     public void sendEmail__serializationError() throws SerializationException,
             ExecutionException, InterruptedException, JsonProcessingException {
         
-        when(emailFactory.buildEmail(emailData, null, "test-message")).thenReturn(mockEmail);
+        when(emailFactory.buildEmail(emailData, "test-app", "test-message")).thenReturn(mockEmail);
         when(emailSerializer.toBinary(mockEmail)).thenThrow(new SerializationException("TEST ERROR"));
         
-        emailKafkaProducer = new EmailProducer(emailFactory, emailSerializer, chKafkaProducer);
+        emailKafkaProducer = new EmailProducer(emailFactory, emailSerializer, chKafkaProducer, "test-app");
         emailKafkaProducer.sendEmail(emailData, "test-message");
 
         verify(emailSerializer).toBinary(mockEmail);

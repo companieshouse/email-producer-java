@@ -1,11 +1,9 @@
 package uk.gov.companieshouse.email_producer;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import uk.gov.companieshouse.email_producer.factory.EmailFactory;
@@ -19,19 +17,19 @@ import uk.gov.companieshouse.kafka.serialization.AvroSerializer;
 @Service
 public class EmailProducer {
 
-    @Value("${email.producer.appId}")
-    private String appId;
+    private static final String EMAIL_SEND_TOPIC = "email-send";
 
     private final EmailFactory emailFactory;
     private final AvroSerializer<Email> serializer;
     private final CHKafkaProducer chKafkaProducer;
-    private static final String EMAIL_SEND_TOPIC = "email-send";
+    private final String appId;
 
     public EmailProducer(final EmailFactory emailFactory, final AvroSerializer<Email> serializer,
-            final CHKafkaProducer chKafkaProducer) {
+            final CHKafkaProducer chKafkaProducer, @Qualifier("emailProducerAppId") final String appId) {
         this.emailFactory = emailFactory;
         this.serializer = serializer;
         this.chKafkaProducer = chKafkaProducer;
+        this.appId = appId;
         System.out.println(String.format("App ID: %s", appId));
     }
 
