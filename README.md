@@ -36,8 +36,8 @@ Before your service will be able to send an email, you'll need to define a HTML 
 
 ```yaml
 'suppression_application_received':
-	'html-template': "suppression_application_received"
-	'sent-by-app-ids': [ 'suppression-api' ]
+  'html-template': "suppression_application_received"
+  'sent-by-app-ids': [ 'suppression-api' ]
 ```
 
 where:
