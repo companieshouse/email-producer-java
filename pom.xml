@@ -25,7 +25,7 @@
         <kafka-models.version>1.0.14</kafka-models.version>
         <jackson.version.core>2.11.3</jackson.version.core>
         <jackson.version.databind>2.11.3</jackson.version.databind>
-        <spring-framework.version>5.2.9.RELEASE</spring-framework.version>
+        <spring-framework.version>5.3.5</spring-framework.version>
 
         <!-- Testing -->
         <junit.version>4.13.1</junit.version>
