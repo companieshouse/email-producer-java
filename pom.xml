@@ -29,7 +29,7 @@
 
         <!-- Testing -->
         <junit.version>4.13.1</junit.version>
-        <mockito.version>3.5.13</mockito.version>
+        <mockito.version>3.11.1</mockito.version>
 
         <!-- Sonar -->
         <sonar.coverage.exclusions>
