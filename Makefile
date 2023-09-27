@@ -32,6 +32,15 @@ dist: clean package
 publish:
 	mvn jar:jar deploy:deploy
 
-.PHONY: sonar-pr-analysis
+.PHONY: sonar
 sonar:
 	mvn sonar:sonar
+
+.PHONY: sonar-pr-analysis
+sonar-pr-analysis:
+	mvn sonar:sonar -P sonar-pr-analysis
+
+.PHONY: security-check
+security-check:
+	mvn org.owasp:dependency-check-maven:purge
+	mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=4 -DassemblyAnalyzerEnabled=false
