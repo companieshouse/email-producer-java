@@ -96,6 +96,16 @@
             <artifactId>sonar-maven-plugin</artifactId>
             <version>${sonar-maven-plugin.version}</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.plexus</groupId>
+                    <artifactId>plexus-sec-dispatcher</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.sonarsource.scanner.api</groupId>
+                    <artifactId>sonar-scanner-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
