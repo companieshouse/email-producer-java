@@ -8,7 +8,7 @@ The aim of this package is to standardise the email-sending flow, abstracting aw
 ## Requirements
 
 In order to run the service locally you will need the following:
-- [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [Java](http://www.oracle.com/technetwork/java/javase/downloads)
 - [Maven](https://maven.apache.org/download.cgi)
 - [Git](https://git-scm.com/downloads)
 
