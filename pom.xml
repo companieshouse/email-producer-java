@@ -22,7 +22,7 @@
 
         <!-- Dependency Versions -->
         <ch-kafka.version>2.0.1</ch-kafka.version>
-        <kafka-models.version>2.0.0</kafka-models.version>
+        <kafka-models.version>2.0.2</kafka-models.version>
         <jackson.version.core>2.15.2</jackson.version.core>
         <jackson.version.databind>2.15.2</jackson.version.databind>
         <spring-framework.version>6.0.9</spring-framework.version>
