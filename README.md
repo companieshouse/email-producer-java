@@ -4,6 +4,10 @@ Email Producer is a library for handling the sending of emails via Kafka, the [C
 
 The aim of this package is to standardise the email-sending flow, abstracting away all of the serialisation and Kafka message building logic so that future engineers looking to add emails to their service are free to focus on application-specific things, such as the data being sent to the Notification API and the templates they’ll use to render the emails. The result is the ability to send an email with a single new Maven dependency, a few configuration variables and one method call.
 
+Things To consider
+--
+
++ Always make sure any code changes you make get copied across to `main-8` (compatible with Java 8) also to `main` (compatible with Java 17)
 
 ## Requirements
 
