@@ -11,11 +11,13 @@ Things To consider
 
 ###### Changes Specific to Java 8
 
++ Please create branch only from `main-8`
 + Please raise a PR to merge your changes only to [main-8](https://github.com/companieshouse/email-producer-java/tree/main-8) branch
 + Use Java 8 Major tags generated from pipeline in your references (example : tags 1.x.x for java 8)
 
 ###### Changes Specific to Java 21
 
++ Please create branch only from `main`
 + Please merge your changes only to [main](https://github.com/companieshouse/email-producer-java) branch
 + Use Java 21 Major tags generated from pipeline in your references (example : tags 3.x.x for java 21)
 
