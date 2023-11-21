@@ -7,21 +7,23 @@ The aim of this package is to standardise the email-sending flow, abstracting aw
 Things To consider
 --
 
-+ Always make sure any code changes you make get copied across to `main-8` (compatible with Java 8) also to `main` (compatible with Java 17)
++ Always make sure any code changes you make get copied across to `main-8` (compatible with Java 8) also to `main` (compatible with Java 21)
 
 ###### Changes Specific to Java 8
 
++ Please create branch only from `main-8`
 + Please raise a PR to merge your changes only to [main-8](https://github.com/companieshouse/email-producer-java/tree/main-8) branch
 + Use Java 8 Major tags generated from pipeline in your references (example : tags 1.x.x for java 8)
 
-###### Changes Specific to Java 17
+###### Changes Specific to Java 21
 
++ Please create branch only from `main`
 + Please merge your changes only to [main](https://github.com/companieshouse/email-producer-java) branch
-+ Use Java 17 Major tags generated from pipeline in your references (example : tags 2.x.x for java 17)
++ Use Java 21 Major tags generated from pipeline in your references (example : tags 3.x.x for java 21)
 
 ###### Pipeline
 
-+ Please use this [Pipeline](https://ci-platform.companieshouse.gov.uk/teams/team-development/pipelines/email-producer-java) and make sure respective `source-code-main-17` or `source-code-main-8` task gets started once the PR is created or after the PR is merged to `main` or `main-8` and once the pipeline tasks are complete then use the created tags respectively.
++ Please use this [Pipeline](https://ci-platform.companieshouse.gov.uk/teams/team-development/pipelines/email-producer-java) and make sure respective `source-code-main` or `source-code-main-8` task gets started once the PR is created or after the PR is merged to `main` or `main-8` and once the pipeline tasks are complete then use the created tags respectively.
 
 ## Requirements
 
