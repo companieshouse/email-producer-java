@@ -30,8 +30,7 @@
         <json-path.version>2.9.0</json-path.version>
         <http2-server.version>11.0.24</http2-server.version>
         <guava.version>33.3.1-jre</guava.version>
-        <commons-fileupload.version>1.5</commons-fileupload.version>
-
+        <commons-fileupload.version>2.0.0-M2</commons-fileupload.version>
         <!-- Testing -->
         <junit.version>4.13.2</junit.version>
         <mockito.version>5.14.2</mockito.version>
@@ -110,9 +109,10 @@
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-fileupload2-jakarta-servlet6 -->
         <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-fileupload2-jakarta-servlet6</artifactId>
             <version>${commons-fileupload.version}</version>
         </dependency>
         <dependency>
