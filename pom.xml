@@ -6,7 +6,7 @@
 
     <artifactId>email-producer-java</artifactId>
     <name>email-producer-java</name>
-    <version>SNAPSHOT-6.0</version>
+    <version>unversioned</version>
     <packaging>jar</packaging>
 
     <parent>
