@@ -30,7 +30,7 @@
         <json-path.version>2.9.0</json-path.version>
         <http2-server.version>11.0.25</http2-server.version>
         <guava.version>33.4.8-jre</guava.version>
-        <commons-fileupload.version>2.0.0-M2</commons-fileupload.version>
+        <commons-fileupload.version>2.0.0-M4</commons-fileupload.version> <!-- Even though this version is labelled as a Milestone, the Mx series seem to be the only releases available. -->
         <!-- Testing -->
         <junit.version>4.13.2</junit.version>
         <mockito.version>5.14.2</mockito.version>
