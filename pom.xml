@@ -22,7 +22,7 @@
         <maven.compiler.target>21</maven.compiler.target>
 
         <!-- Dependency Versions -->
-        <ch-kafka.version>3.0.2</ch-kafka.version> <!-- latest that works. 3.0.3 does not work -->
+        <ch-kafka.version>3.0.5</ch-kafka.version>
         <kafka-models.version>3.0.8</kafka-models.version>
         <spring-framework.version>6.2.0</spring-framework.version>
         <jackson.version.core>2.18.1</jackson.version.core>
