@@ -23,15 +23,17 @@
 
         <!-- Dependency Versions -->
         <ch-kafka.version>3.0.5</ch-kafka.version>
-        <kafka-models.version>3.0.8</kafka-models.version>
-        <spring-framework.version>6.2.0</spring-framework.version>
+        <kafka-models.version>3.0.19</kafka-models.version>
+        <spring-framework.version>6.2.8</spring-framework.version>
         <jackson.version.core>2.18.1</jackson.version.core>
         <jackson.version.databind>2.18.1</jackson.version.databind>
         <avro.version>1.12.0</avro.version>
         <json-path.version>2.9.0</json-path.version>
         <http2-server.version>11.0.24</http2-server.version>
         <guava.version>33.3.1-jre</guava.version>
-        <commons-fileupload.version>2.0.0-M2</commons-fileupload.version>
+        <commons-fileupload.version>2.0.0-M4</commons-fileupload.version>
+        <google-gson.version>2.13.1</google-gson.version>
+        <jetty-http2-common.version>12.0.23</jetty-http2-common.version>
         <!-- Testing -->
         <junit.version>4.13.2</junit.version>
         <mockito.version>5.14.2</mockito.version>
@@ -109,12 +111,25 @@
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
-            <version>2.8.0</version>
+            <version>${json-path.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty.http2</groupId>
             <artifactId>http2-server</artifactId>
             <version>${http2-server.version}</version>
+               <exclusions>
+                   <!-- Excluded to mitigate CVE-2025-1948, CVE fix moved to jetty-http2-common-->
+                   <exclusion>
+                       <groupId>org.eclipse.jetty.http2</groupId>
+                       <artifactId>http2-common</artifactId>
+                   </exclusion>
+               </exclusions>
+        </dependency>
+        <!-- Explicitly included CVE-2025-1948 a fixed version of jetty-http2-common to override the excluded transitive dependency -->
+        <dependency>
+            <groupId>org.eclipse.jetty.http2</groupId>
+            <artifactId>jetty-http2-common</artifactId>
+            <version>${jetty-http2-common.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -160,7 +175,18 @@
                     <groupId>org.sonarsource.scanner.api</groupId>
                     <artifactId>sonar-scanner-api</artifactId>
                 </exclusion>
+                <!-- Excluded to mitigate CVE-2025-53864 -->
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+        <!-- Explicitly included CVE-2025-53864 fixed version of gson to override the excluded transitive dependency -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${google-gson.version}</version>
         </dependency>
     </dependencies>
 
