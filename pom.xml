@@ -22,8 +22,8 @@
         <maven.compiler.target>21</maven.compiler.target>
 
         <!-- Dependency Versions -->
-        <ch-kafka.version>3.0.5</ch-kafka.version>
-        <kafka-models.version>3.0.19</kafka-models.version>
+        <ch-kafka.version>3.0.6</ch-kafka.version>
+        <kafka-models.version>3.0.20</kafka-models.version>
         <spring-framework.version>6.2.8</spring-framework.version>
         <jackson.version.core>2.18.1</jackson.version.core>
         <jackson.version.databind>2.18.1</jackson.version.databind>
