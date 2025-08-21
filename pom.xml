@@ -23,8 +23,8 @@
 
         <!-- Dependency Versions -->
         <ch-kafka.version>3.0.6</ch-kafka.version>
-        <kafka-models.version>3.0.20</kafka-models.version>
-        <spring-framework.version>6.2.8</spring-framework.version>
+        <kafka-models.version>3.0.21</kafka-models.version>
+        <spring-framework.version>6.2.10</spring-framework.version>
         <jackson.version.core>2.18.1</jackson.version.core>
         <jackson.version.databind>2.18.1</jackson.version.databind>
         <avro.version>1.12.0</avro.version>
@@ -33,7 +33,7 @@
         <guava.version>33.3.1-jre</guava.version>
         <commons-fileupload.version>2.0.0-M4</commons-fileupload.version>
         <google-gson.version>2.13.1</google-gson.version>
-        <jetty-http2-common.version>12.0.23</jetty-http2-common.version>
+        <jetty-http2-common.version>12.1.0</jetty-http2-common.version>
         <!-- Testing -->
         <junit.version>4.13.2</junit.version>
         <mockito.version>5.14.2</mockito.version>
