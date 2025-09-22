@@ -20,11 +20,11 @@
         <!-- JDK -->
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-
+        <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <!-- Dependency Versions -->
         <ch-kafka.version>3.0.6</ch-kafka.version>
         <kafka-models.version>3.0.21</kafka-models.version>
-        <spring-framework.version>6.2.10</spring-framework.version>
+        <spring-framework.version>6.2.11</spring-framework.version>
         <jackson.version.core>2.18.1</jackson.version.core>
         <jackson.version.databind>2.18.1</jackson.version.databind>
         <avro.version>1.12.0</avro.version>
@@ -32,24 +32,19 @@
         <http2-server.version>11.0.24</http2-server.version>
         <guava.version>33.3.1-jre</guava.version>
         <commons-fileupload.version>2.0.0-M4</commons-fileupload.version>
-        <google-gson.version>2.13.1</google-gson.version>
         <jetty-http2-common.version>12.1.0</jetty-http2-common.version>
         <!-- Testing -->
         <junit.version>4.13.2</junit.version>
         <mockito.version>5.14.2</mockito.version>
-
         <!-- Sonar -->
-        <sonar-maven-plugin.version>5.1.0.4751</sonar-maven-plugin.version>
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.projectName>email-producer-java</sonar.projectName>
+        <!--suppress UnresolvedMavenProperty -->
+        <sonar.host.url>${CODE_ANALYSIS_HOST_URL}</sonar.host.url>
+        <!--suppress UnresolvedMavenProperty -->
+        <sonar.token>${CODE_ANALYSIS_TOKEN}</sonar.token>
+        <sonar.login/>
+        <sonar.password/>
         <sonar.projectKey>uk.gov.companieshouse:email-producer-java</sonar.projectKey>
-        <sonar.sources>src/main</sonar.sources>
-        <sonar.tests>src/test</sonar.tests>
-        <sonar.verbose>true</sonar.verbose>
-        <sonar.coverage.jacoco.xmlReportPaths>
-            ${project.basedir}/target/site/jacoco/jacoco.xml
-        </sonar.coverage.jacoco.xmlReportPaths>
-        <sonar.jacoco.reports>${project.basedir}/target/site</sonar.jacoco.reports>
-
         <sonar.coverage.exclusions>
             **/model/*,
             **/model/**/*
@@ -161,57 +156,27 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.sonarsource.scanner.maven</groupId>
-            <artifactId>sonar-maven-plugin</artifactId>
-            <version>${sonar-maven-plugin.version}</version>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.codehaus.plexus</groupId>
-                    <artifactId>plexus-sec-dispatcher</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.sonarsource.scanner.api</groupId>
-                    <artifactId>sonar-scanner-api</artifactId>
-                </exclusion>
-                <!-- Excluded to mitigate CVE-2025-53864 -->
-                <exclusion>
-                    <groupId>com.google.code.gson</groupId>
-                    <artifactId>gson</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- Explicitly included CVE-2025-53864 fixed version of gson to override the excluded transitive dependency -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>${google-gson.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <fork>true</fork>
+                    <meminitial>128m</meminitial>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <maxmem>512m</maxmem>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>default-prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>default-report</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
